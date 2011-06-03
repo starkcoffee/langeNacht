@@ -27,7 +27,7 @@
       $(document).ready(function(){
         
         $('#getPlan').click(function(){
-            
+            $('#plan').empty();
             $('#planTemplate').tmpl({events: Lange.schedule(extractEvents())})
               .appendTo( "#plan" );
          });
