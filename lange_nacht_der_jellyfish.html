@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title>The long night of the jellyfish!</title>
+    <script type="text/javascript" src="lib/jquery-1.6.1.js"></script>
+    <script type="text/javascript" src="app/javascript/lange.js"></script>
+    
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function(){
+         $("#plan").click(function(event){
+           alert("Thanks for planning!");
+         });
+       });
+    </script>
+  </head>
+  <body>
+    Welcome to the long night of the jellyfish!  You can do anything on the long night of the jellyfish!
+    
+    <p>But here are some suggestions:
+      
+    <div class='vevent'>
+         <span class="summary">What do Jellyfish eat?</span>
+         - a lecture on the jellyfishy ways of eating <span class="dtstart">2011-07-20</span> 
+         at the Jellyfish Bar in <span class="location">110 Schönhauser Alle, Berlin</span>.
+        </span>
+    </div>
+    <div class="plan">
+      <button id="plan">Plan your night!</button>
+    </div>
+    
+  </body>
+</html>  
