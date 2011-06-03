@@ -6,10 +6,22 @@
     
     <script type="text/javascript" charset="utf-8">
       $(document).ready(function(){
-         $("#plan").click(function(event){
-           alert("Thanks for planning!");
+        
+        var events =  $(".vevent").map(function(element){
+           return {
+              title: $(this).find(".summary").html()
+           };
+        });
+        
+        $("#plan").click(function(event){
+            document.writeln("Your plan:<br>")
+            for(var i=0; i < events.length; i++){
+               document.writeln(events[i].title + "<br>");
+            }
          });
        });
+       
+       
     </script>
   </head>
   <body>
@@ -23,6 +35,14 @@
          at the Jellyfish Bar in <span class="location">110 Schönhauser Alle, Berlin</span>.
         </span>
     </div>
+    
+    <div class='vevent'>
+         <span class="summary">See Jellyfish Play Guitar</span>
+         - a performance by local jellyfish star "Bob Jellyfish"<span class="dtstart">2011-07-21</span> 
+         at the Jellyfish Bar in <span class="location">Kaffee Mitte, 2 Weinmeisterstrasse, Berlin</span>.
+        </span>
+    </div>
+    
     <div class="plan">
       <button id="plan">Plan your night!</button>
     </div>
