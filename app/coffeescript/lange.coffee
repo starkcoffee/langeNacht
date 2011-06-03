@@ -1,0 +1,4 @@
+Lange.schedule = (events) ->
+    events
+    
+    
