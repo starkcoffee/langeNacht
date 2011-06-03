@@ -2,27 +2,42 @@
   <head>
     <title>The long night of the jellyfish!</title>
     <script type="text/javascript" src="lib/jquery-1.6.1.js"></script>
+    <script type="text/javascript" src="lib/jquery-tmpl-beta1.js"></script>
     <script type="text/javascript" src="app/javascript/lange.js"></script>
     
+    <script id="planTemplate" type="text/x-jquery-tmpl">
+        Your plan:<br>
+        <ul>
+          {{each events}}
+            <li>${title}</li>
+          {{/each}}
+        <ul/>
+    </script>
+    
     <script type="text/javascript" charset="utf-8">
-      $(document).ready(function(){
-        
-        var events =  $(".vevent").map(function(element){
+    
+      function extractEvents(){
+        return $(".vevent").map(function(){
            return {
               title: $(this).find(".summary").html()
            };
-        });
+        }).toArray();
+      };
+    
+      $(document).ready(function(){
         
-        $("#plan").click(function(event){
-            document.writeln("Your plan:<br>")
-            for(var i=0; i < events.length; i++){
-               document.writeln(events[i].title + "<br>");
-            }
+        $('#getPlan').click(function(){
+            
+            $('#planTemplate').tmpl({events: Lange.schedule(extractEvents())})
+              .appendTo( "#plan" );
          });
        });
        
-       
     </script>
+    
+    <style type="text/css" media="screen">
+       div {padding: 10;}
+    </style>
   </head>
   <body>
     Welcome to the long night of the jellyfish!  You can do anything on the long night of the jellyfish!
@@ -43,8 +58,10 @@
         </span>
     </div>
     
-    <div class="plan">
-      <button id="plan">Plan your night!</button>
+    <button id="getPlan">Plan your night!</button>
+    <div id="plan">
+    </div>
+    <div id="movieList">
     </div>
     
   </body>
