@@ -19,7 +19,8 @@
       function extractEvents(){
         return $(".vevent").map(function(){
            return {
-              summary: $(this).find(".summary").html()
+              summary: $(this).find(".summary").html(),
+              dtstart: $(this).find(".dtstart").attr('title')
            };
         }).toArray();
       };
@@ -44,16 +45,26 @@
     
     <p>But here are some suggestions:
       
+
+    
+    <div class='vevent'>
+         <span class="summary">See Jellyfish Play Guitar</span>
+         - a performance by local jellyfish star "Bob Jellyfish"<abbr class="dtstart" title="2011-07-21T13:00">
+           1pm, July 21</abbr> 
+         at the Jellyfish Bar in <span class="location">Kaffee Mitte, 2 Weinmeisterstrasse, Berlin</span>.
+        </span>
+    </div>
+    
     <div class='vevent'>
          <span class="summary">What do Jellyfish eat?</span>
-         - a lecture on the jellyfishy ways of eating <span class="dtstart">2011-07-20</span> 
+         - a lecture on the jellyfishy ways of eating <abbr class="dtstart" title="2011-07-20T19:00">7pm, 20 July</abbr> 
          at the Jellyfish Bar in <span class="location">110 Schönhauser Alle, Berlin</span>.
         </span>
     </div>
     
     <div class='vevent'>
-         <span class="summary">See Jellyfish Play Guitar</span>
-         - a performance by local jellyfish star "Bob Jellyfish"<span class="dtstart">2011-07-21</span> 
+         <span class="summary">See Jellyfish Play Piano</span>
+         - piano playing as you have never seen it before"<abbr class="dtstart" title="2011-07-21T13:00">1pm, July 21</abbr> 
          at the Jellyfish Bar in <span class="location">Kaffee Mitte, 2 Weinmeisterstrasse, Berlin</span>.
         </span>
     </div>
