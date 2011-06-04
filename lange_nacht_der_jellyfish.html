@@ -54,15 +54,15 @@
         <ul>
           {{each eventSlots}}
             {{if conflict}}
-              <li>${events[0].dateDescription} - Damn! You have a conflict!!
+              <li>${vevents[0].dateDescription} - Damn! You have a conflict!!
                 <ul>
-                  {{each events}}
+                  {{each vevents}}
                   <li>${summary}</li>
                   {{/each}}
                 </ul>
               </li>
             {{else}}
-              <li>${event.dateDescription} - ${event.summary}</li>
+              <li>${vevent.dateDescription} - ${vevent.summary}</li>
             {{/if}}
           {{/each}}
         <ul/>

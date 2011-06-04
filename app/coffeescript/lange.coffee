@@ -1,23 +1,23 @@
 root = exports ? this
 root.Lange = {}
 
-Lange.schedule = (events) ->
+Lange.schedule = (vevents) ->
     
-    # group events by start time
+    # group vevents by start time
     scheduleMap = {}
-    for event in events
-        scheduleMap[event.dtstart] or= []
-        scheduleMap[event.dtstart].push event
+    for vevent in vevents
+        scheduleMap[vevent.dtstart] or= []
+        scheduleMap[vevent.dtstart].push vevent
     
     schedule = []
-    for date, events of scheduleMap
-        scheduleSlot = {dtstart:  events[0].dtstart }
+    for date, vevents of scheduleMap
+        scheduleSlot = {dtstart:  vevents[0].dtstart }
         
-        if events.length > 1
+        if vevents.length > 1
             scheduleSlot.conflict = true
-            scheduleSlot.events = events
+            scheduleSlot.vevents = vevents
         else
-            scheduleSlot.event = events[0]
+            scheduleSlot.vevent = vevents[0]
                 
         schedule.push(scheduleSlot)
         

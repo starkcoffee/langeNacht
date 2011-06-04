@@ -2,25 +2,25 @@
   var root;
   root = typeof exports !== "undefined" && exports !== null ? exports : this;
   root.Lange = {};
-  Lange.schedule = function(events) {
-    var date, event, schedule, scheduleMap, scheduleSlot, _i, _len, _name;
+  Lange.schedule = function(vevents) {
+    var date, schedule, scheduleMap, scheduleSlot, vevent, _i, _len, _name;
     scheduleMap = {};
-    for (_i = 0, _len = events.length; _i < _len; _i++) {
-      event = events[_i];
-      scheduleMap[_name = event.dtstart] || (scheduleMap[_name] = []);
-      scheduleMap[event.dtstart].push(event);
+    for (_i = 0, _len = vevents.length; _i < _len; _i++) {
+      vevent = vevents[_i];
+      scheduleMap[_name = vevent.dtstart] || (scheduleMap[_name] = []);
+      scheduleMap[vevent.dtstart].push(vevent);
     }
     schedule = [];
     for (date in scheduleMap) {
-      events = scheduleMap[date];
+      vevents = scheduleMap[date];
       scheduleSlot = {
-        dtstart: events[0].dtstart
+        dtstart: vevents[0].dtstart
       };
-      if (events.length > 1) {
+      if (vevents.length > 1) {
         scheduleSlot.conflict = true;
-        scheduleSlot.events = events;
+        scheduleSlot.vevents = vevents;
       } else {
-        scheduleSlot.event = events[0];
+        scheduleSlot.vevent = vevents[0];
       }
       schedule.push(scheduleSlot);
     }

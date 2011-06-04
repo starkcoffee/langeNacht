@@ -20,21 +20,15 @@ function expectedSchedule(){
         if (eventSpec.conflict){
            slot.conflict = true;
            slot.dtstart = eventSpec.events[0].dtstart;
-           slot.events = eventSpec.events; 
+           slot.vevents = eventSpec.events; 
         }
         else {
          slot.dtstart = eventSpec.dtstart;    
-         slot.event = eventSpec;
+         slot.vevent = eventSpec;
         };
         return slot;
     });
 }
-
-beforeEach(function() {
-  this.addMatchers({
-    toContainInOrder: function() { return this.actual === expectedSchedule(args(arguments)); }
-  });
-});
 
 
 describe("test helper code", function(){
@@ -45,8 +39,8 @@ describe("test helper code", function(){
     
     it("should generate the correct expected representation", function(){
         expect(expectedSchedule(event1, conflict(event2, eventWhichConflictsWithEvent2))).toEqual([
-            {dtstart: event1.dtstart, event: event1},
-            {dtstart: event2.dtstart, conflict: true, events: [event2, eventWhichConflictsWithEvent2]},
+            {dtstart: event1.dtstart, vevent: event1},
+            {dtstart: event2.dtstart, conflict: true, vevents: [event2, eventWhichConflictsWithEvent2]},
             ]);
     });
 });
