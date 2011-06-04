@@ -9,6 +9,18 @@
     
     <script type="text/javascript" charset="utf-8">
       
+      Lange.schedule = function(events){
+        return [
+             {summary: "moo1", dtstart: "2011-07-21T13:00", dateDescription: "1pm 21 July"},
+             { conflict: true, 
+              events: [
+                {summary: "moo2", dtstart: "2011-07-21T15:00", dateDescription: "3pm 21 July"},
+                {summary: "moo3", dtstart: "2011-07-21T15:00", dateDescription: "3pm 21 July"}
+                ]
+            }
+        ];
+      }
+      
       function extractEvents(){
         return $(".vevent").map(function(){
            return {
@@ -18,13 +30,17 @@
            };
         }).toArray();
       };
+      
+      function renderPlan(){
+        $('#plan').empty();
+        $('#planTemplate').tmpl({events: Lange.schedule(extractEvents())})
+          .appendTo( "#plan" );
+      }
     
       $(document).ready(function(){
         
         $('#getPlan').click(function(){
-            $('#plan').empty();
-            $('#planTemplate').tmpl({events: Lange.schedule(extractEvents())})
-              .appendTo( "#plan" );
+            renderPlan();
          });
        });
        
@@ -34,7 +50,16 @@
         Your plan:<br>
         <ul>
           {{each events}}
-            <li>${dateDescription} - ${summary}</li>
+            {{if conflict}}
+              <li>${events[0].dateDescription} - Damn! You have a conflict!!
+                <ul>
+                  <li>${events[0].summary}</li>
+                  <li>${events[1].summary}</li>
+                </ul>
+              </li>
+            {{else}}
+              <li>${dateDescription} - ${summary}</li>
+            {{/if}}
           {{/each}}
         <ul/>
     </script>
