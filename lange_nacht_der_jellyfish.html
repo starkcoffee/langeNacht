@@ -11,7 +11,7 @@
       
       Lange.schedule = function(events){
         return [
-             {summary: "moo1", dtstart: "2011-07-21T13:00", dateDescription: "1pm 21 July"},
+             {event: {summary: "moo1", dtstart: "2011-07-21T13:00", dateDescription: "1pm 21 July"}},
              { conflict: true, 
               events: [
                 {summary: "moo2", dtstart: "2011-07-21T15:00", dateDescription: "3pm 21 July"},
@@ -33,7 +33,7 @@
       
       function renderPlan(){
         $('#plan').empty();
-        $('#planTemplate').tmpl({events: Lange.schedule(extractEvents())})
+        $('#planTemplate').tmpl({eventSlots: Lange.schedule(extractEvents())})
           .appendTo( "#plan" );
       }
     
@@ -49,16 +49,17 @@
     <script id="planTemplate" type="text/x-jquery-tmpl">
         Your plan:<br>
         <ul>
-          {{each events}}
+          {{each eventSlots}}
             {{if conflict}}
               <li>${events[0].dateDescription} - Damn! You have a conflict!!
                 <ul>
-                  <li>${events[0].summary}</li>
-                  <li>${events[1].summary}</li>
+                  {{each events}}
+                  <li>${summary}</li>
+                  {{/each}}
                 </ul>
               </li>
             {{else}}
-              <li>${dateDescription} - ${summary}</li>
+              <li>${event.dateDescription} - ${event.summary}</li>
             {{/if}}
           {{/each}}
         <ul/>

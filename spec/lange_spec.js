@@ -6,7 +6,7 @@ function conflict(events){
     return {conflict: true, events: events}
 };
 
-function scheduleWith(eventSpecs){
+function expectedSchedule(eventSpecs){
     return eventSpecs.map(function(eventSpec){
         var slot = {};
         if (eventSpec.conflict){
@@ -24,7 +24,7 @@ function scheduleWith(eventSpecs){
 
 describe("test helper code", function(){
     it("should generate the correct expected representation", function(){
-        expect(scheduleWith([event1, conflict([event2, eventWhichConflictsWithEvent2])])).toEqual([
+        expect(expectedSchedule([event1, conflict([event2, eventWhichConflictsWithEvent2])])).toEqual([
             {dtstart: event1.dtstart, event: event1},
             {dtstart: event2.dtstart, conflict: true, events: [event2, eventWhichConflictsWithEvent2]},
             ]);
@@ -34,18 +34,18 @@ describe("test helper code", function(){
 describe("the scheduler", function() {    
     it("should order events by time", function() {
         var schedule = Lange.schedule([event2, event1]);
-        expect(schedule).toEqual(scheduleWith([event1, event2]));
+        expect(schedule).toEqual(expectedSchedule([event1, event2]));
     });
     
     it("should handle events with no time", function() {
         var eventWithNoDate = {summary: "foo"};
         var schedule = Lange.schedule([event1, eventWithNoDate]);
-        expect(schedule).toEqual(scheduleWith([event1, eventWithNoDate]));
+        expect(schedule).toEqual(expectedSchedule([event1, eventWithNoDate]));
     });
     
     it("should recognise conflicts and return them in the result", function(){
         var schedule = Lange.schedule([event1, event2, eventWhichConflictsWithEvent2]);
-        expect(schedule).toEqual(scheduleWith([event1, conflict([event2, eventWhichConflictsWithEvent2])]));
+        expect(schedule).toEqual(expectedSchedule([event1, conflict([event2, eventWhichConflictsWithEvent2])]));
     });
     
     it("should throw exception if not given an array of events", function(){
