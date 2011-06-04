@@ -2,16 +2,15 @@ root = exports ? this
 root.Lange = {}
 
 Lange.schedule = (events) ->
-    #events.sort (a, b) -> new Date(a.dtstart) - new Date(b.dtstart)
     
     # group events by start time
-    schedule = {}
+    scheduleMap = {}
     for event in events
-        schedule[event.dtstart] or= []
-        schedule[event.dtstart].push event
+        scheduleMap[event.dtstart] or= []
+        scheduleMap[event.dtstart].push event
     
-    scheduleAsList = []
-    for date, events of schedule
+    schedule = []
+    for date, events of scheduleMap
         scheduleSlot = {dtstart:  events[0].dtstart }
         
         if events.length > 1
@@ -20,9 +19,9 @@ Lange.schedule = (events) ->
         else
             scheduleSlot.event = events[0]
                 
-        scheduleAsList.push(scheduleSlot)
+        schedule.push(scheduleSlot)
         
-    scheduleAsList.sort (a,b) -> new Date(a.dtstart) - new Date(b.dtstart)
+    schedule.sort (a,b) -> new Date(a.dtstart) - new Date(b.dtstart)
             
     
     

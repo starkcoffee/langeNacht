@@ -3,16 +3,16 @@
   root = typeof exports !== "undefined" && exports !== null ? exports : this;
   root.Lange = {};
   Lange.schedule = function(events) {
-    var date, event, schedule, scheduleAsList, scheduleSlot, _i, _len, _name;
-    schedule = {};
+    var date, event, schedule, scheduleMap, scheduleSlot, _i, _len, _name;
+    scheduleMap = {};
     for (_i = 0, _len = events.length; _i < _len; _i++) {
       event = events[_i];
-      schedule[_name = event.dtstart] || (schedule[_name] = []);
-      schedule[event.dtstart].push(event);
+      scheduleMap[_name = event.dtstart] || (scheduleMap[_name] = []);
+      scheduleMap[event.dtstart].push(event);
     }
-    scheduleAsList = [];
-    for (date in schedule) {
-      events = schedule[date];
+    schedule = [];
+    for (date in scheduleMap) {
+      events = scheduleMap[date];
       scheduleSlot = {
         dtstart: events[0].dtstart
       };
@@ -22,9 +22,9 @@
       } else {
         scheduleSlot.event = events[0];
       }
-      scheduleAsList.push(scheduleSlot);
+      schedule.push(scheduleSlot);
     }
-    return scheduleAsList.sort(function(a, b) {
+    return schedule.sort(function(a, b) {
       return new Date(a.dtstart) - new Date(b.dtstart);
     });
   };

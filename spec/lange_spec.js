@@ -30,6 +30,13 @@ function expectedSchedule(){
     });
 }
 
+beforeEach(function() {
+  this.addMatchers({
+    toContainInOrder: function() { return this.actual === expectedSchedule(args(arguments)); }
+  });
+});
+
+
 describe("test helper code", function(){
     
     it("conflict func should handle varags ", function(){
@@ -43,6 +50,7 @@ describe("test helper code", function(){
             ]);
     });
 });
+
 
 describe("the scheduler", function() {    
     it("should order events by time", function() {
