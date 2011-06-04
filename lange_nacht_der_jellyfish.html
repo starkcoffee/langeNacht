@@ -9,7 +9,7 @@
         Your plan:<br>
         <ul>
           {{each events}}
-            <li>${title}</li>
+            <li>${summary}</li>
           {{/each}}
         <ul/>
     </script>
@@ -19,7 +19,7 @@
       function extractEvents(){
         return $(".vevent").map(function(){
            return {
-              title: $(this).find(".summary").html()
+              summary: $(this).find(".summary").html()
            };
         }).toArray();
       };
