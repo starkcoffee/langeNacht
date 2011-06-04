@@ -5,22 +5,16 @@
     <script type="text/javascript" src="lib/jquery-tmpl-beta1.js"></script>
     <script type="text/javascript" src="app/javascript/lange.js"></script>
     
-    <script id="planTemplate" type="text/x-jquery-tmpl">
-        Your plan:<br>
-        <ul>
-          {{each events}}
-            <li>${summary}</li>
-          {{/each}}
-        <ul/>
-    </script>
+
     
     <script type="text/javascript" charset="utf-8">
-    
+      
       function extractEvents(){
         return $(".vevent").map(function(){
            return {
               summary: $(this).find(".summary").html(),
-              dtstart: $(this).find(".dtstart").attr('title')
+              dtstart: $(this).find(".dtstart").attr('title'),
+              dateDescription: $(this).find(".dtstart").html()
            };
         }).toArray();
       };
@@ -34,6 +28,15 @@
          });
        });
        
+    </script>
+    
+    <script id="planTemplate" type="text/x-jquery-tmpl">
+        Your plan:<br>
+        <ul>
+          {{each events}}
+            <li>${dateDescription} - ${summary}</li>
+          {{/each}}
+        <ul/>
     </script>
     
     <style type="text/css" media="screen">
