@@ -24,19 +24,10 @@
         ];
       }
 */      
-      function extractEvents(){
-        return $(".vevent").map(function(){
-           return {
-              summary: $(this).find(".summary").html(),
-              dtstart: $(this).find(".dtstart").attr('title'),
-              dateDescription: $(this).find(".dtstart").html()
-           };
-        }).toArray();
-      };
-    
     function extractSelectedEvents(){
-        return $(".vevent").filter(".selected").map(function(){
+        return $(".vevent").filter(".selected").map(function(index){
            return {
+              id: index,
               summary: $(this).find(".summary").html(),
               dtstart: $(this).find(".dtstart").attr('title'),
               dateDescription: $(this).find(".dtstart").html()
@@ -44,36 +35,27 @@
         }).toArray();
       };
 
-      
       function renderPlan(){
-          
         $('#plan').empty();
         $('#planTemplate').tmpl({eventSlots: Lange.schedule(extractSelectedEvents())})
             .appendTo( "#plan" );
-
-        //$('#planTemplate').tmpl({eventSlots: Lange.schedule(extractEvents())})
-        //  .appendTo( "#plan" );
+        $('.conflict').click(function(){
+           // find event with the id and click the checkbox
+                var id = $(this).attr('eventId');
+                $($('.vevent')[id]).find('.fancy-checkbox').click();
+                $(this).remove(); 
+        });
       }
 
      function addCheckBoxesToEvents() {
          $('.vevent').append("<input class='fancy-checkbox' type='checkbox'/>");
          $('.fancy-checkbox').change(function(x){
              $(this).parent().toggleClass("selected");
+             renderPlan();
          });
      }
-
-     function selectEvent(){
-
-     }
-    
       $(document).ready(function(){
         
-        $('#getPlan').click(function(){
-            renderPlan();
-         });
-
-
-
         addCheckBoxesToEvents(); 
        });
        
@@ -86,8 +68,8 @@
             {{if conflict}}
               <li>${vevents[0].dateDescription} - Damn! You have a conflict!!
                 <ul>
-                  {{each vevents}}
-                  <li>${summary}</li>
+                  {{each(index,value) vevents}}
+                  <li class="conflict" eventId="${value.id}">${value.summary}</li>
                   {{/each}}
                 </ul>
               </li>
@@ -132,7 +114,6 @@
         </span>
     </div>
 
-    <button id="getPlan">Plan your night!</button>
     <div id="plan">
     </div>
     <div id="movieList">
