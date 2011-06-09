@@ -1,6 +1,7 @@
 var event1 = {summary: "one", dtstart: "2011-01-30T17:00"};
 var event2 = {summary: "two", dtstart: "2011-01-30T20:00"};
 var eventWhichConflictsWithEvent2 = {summary: "three", dtstart: "2011-01-30T20:00"};
+var multiTimeEventConflictingWithEvent2 = {summary: "three", dtstart: "2011-01-30T20:00"};
 
 function args(arguments){
     var args =[];

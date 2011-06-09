@@ -16,7 +16,9 @@ describe("the scheduler", function() {
         expect(schedule).toEqual(expectedSchedule(event1, conflict(event2, eventWhichConflictsWithEvent2)));
     });
     
-    it("should throw exception if not given an array of events", function(){
+    
+    
+    xit("should throw exception if not given an array of events", function(){
         
     });
     
