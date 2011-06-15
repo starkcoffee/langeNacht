@@ -3,27 +3,13 @@
     <title>The long night of the jellyfish!</title>
     <script type="text/javascript" src="lib/jquery-1.6.1.js"></script>
     <script type="text/javascript" src="lib/jquery-tmpl-beta1.js"></script>
+    <!--  <script type="text/javascript" src="lib/lange-stub.js"></script> -->
     <script type="text/javascript" src="app/javascript/lange.js"></script>
     
 
     
     <script type="text/javascript" charset="utf-8">
-/*     Stub 
-      Lange.schedule = function(events){
-        return [
-             { dtstart: "2011-07-01",
-               vevent: {summary: "moo1", dtstart: "2011-07-21T13:00", dateDescription: "1pm 21 July"}
-             },
-             { dstart: "2011-07-01",
-               conflict: true, 
-               vevents: [
-                {summary: "moo2", dtstart: "2011-07-21T15:00", dateDescription: "3pm 21 July"},
-                {summary: "moo3", dtstart: "2011-07-21T15:00", dateDescription: "3pm 21 July"}
-                ]
-            }
-        ];
-      }
-*/      
+     
     function extractSelectedEvents(){
         return $(".vevent").filter(".selected").map(function(index){
            return {
@@ -65,7 +51,7 @@
         Your plan:<br>
         <ul>
           {{each eventSlots}}
-            {{if conflict}}
+            {{if conflict}}&nbsp;
               <li>${vevents[0].dateDescription} - Damn! You have a conflict!!
                 <ul>
                   {{each(index,value) vevents}}
