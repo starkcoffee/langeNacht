@@ -1,3 +1,13 @@
+describe("the javascript", function(){
+	it("should sort dates properly", function(){
+		dates = ["2011-07-21T13:00", '2011-07-21T11:00']
+		var sorted = dates.sort(function(a, b) {
+	      return new Date(a) - new Date(b);
+	    });
+	    expect(sorted).toEqual([ '2011-07-21T11:00', "2011-07-21T13:00"]);
+	});
+	
+});
 
 describe("the scheduler", function() {    
     it("should order events by time", function() {

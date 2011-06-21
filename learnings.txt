@@ -1,0 +1,14 @@
+Tue 21 Jun 2011 22:46:14 CEST
+
+we tried to test our UI functions with jasmine fixtures and encountered
+the following perplexities:
+- see problems_spec
+
+- browser differences 
+	- fixtures not loading in chrome
+	- safari sort array by dates thing not working
+
+- bad debugging support in firefox
+
+- lots of syntax errors not being highlighted to us
+
