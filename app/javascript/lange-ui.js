@@ -10,7 +10,7 @@ function extractSelectedEvents(){
 };
 
 function addCheckBoxesToEvents() {
-   $('.vevent').append("<input class='fancy-checkbox' type='checkbox'/>");
+   $('.selected').append("<input class='fancy-checkbox' type='checkbox'/>");
    $('.fancy-checkbox').change(function(x){
        $(this).parent().toggleClass("selected");
        renderPlan();
