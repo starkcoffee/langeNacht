@@ -13,20 +13,20 @@ function addCheckBoxesToEvents() {
    $('.vevent').append("<input class='fancy-checkbox' type='checkbox'/>");
    $('.fancy-checkbox').change(function(x){
        $(this).parent().toggleClass("selected");
-       renderPlan();
+       LangeUI.renderPlan();
    });
 }
 
-
-function renderPlan(){
-  $('#plan').empty();
-  $('#planTemplate').tmpl({eventSlots: Lange.schedule(extractSelectedEvents())})
-      .appendTo( "#plan" );
-  $('.conflict').click(function(){
-     // find event with the id and click the checkbox
-      var id = $(this).attr('eventId');
-      $($('.vevent')[id]).find('.fancy-checkbox').click();
-      $(this).remove(); 
-  });
+LangeUI = {
+  renderPlan: function(){
+    $('#plan').empty();
+    $('#planTemplate').tmpl({eventSlots: Lange.schedule(extractSelectedEvents())})
+        .appendTo( "#plan" );
+    $('.conflict').click(function(){
+       // find event with the id and click the checkbox
+        var id = $(this).attr('eventId');
+        $($('.vevent')[id]).find('.fancy-checkbox').click();
+        $(this).remove(); 
+    });
+  }
 }
-

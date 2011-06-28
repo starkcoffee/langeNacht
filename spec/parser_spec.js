@@ -28,16 +28,16 @@ describe("lange-ui", function() {
     });
 
     it("should renderPlan when event is selected", function(){
-        spyOn(window, 'renderPlan');
+        spyOn(LangeUI, 'renderPlan');
 
         addCheckBoxesToEvents();
         $('.vevent:not(.selected) .fancy-checkbox').click();
 
-        expect(window.renderPlan).toHaveBeenCalled();
+        expect(LangeUI.renderPlan).toHaveBeenCalled();
     });
 
     it("should toggle selected events", function(){
-        spyOn(window, 'renderPlan');
+        spyOn(LangeUI, 'renderPlan');
 
         addCheckBoxesToEvents();
         $('.vevent.selected .fancy-checkbox').click();
