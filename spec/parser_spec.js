@@ -1,4 +1,6 @@
 describe("lange-ui", function() {  
+    var addCheckBoxesToEvents = LangeUI.addCheckBoxesToEvents;
+    var renderPlan = LangeUI.renderPlan;
     beforeEach(function(){
         myLoadFixture("selected_events.html");
     });
@@ -19,7 +21,7 @@ describe("lange-ui", function() {
     });
 
     // Ken's homework
-    xit("addCheckBoxesToEvents should add callback to renderPlan on change", function(){
+    xit("LangeUI.addCheckBoxesToEvents should add callback to renderPlan on change", function(){
       addCheckBoxesToEvents.prototype.renderPlan = function(){
         expect(0).toEqual(1);
       };

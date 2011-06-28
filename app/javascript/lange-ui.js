@@ -9,15 +9,15 @@ function extractSelectedEvents(){
    }).toArray();
 };
 
-function addCheckBoxesToEvents() {
-   $('.vevent').append("<input class='fancy-checkbox' type='checkbox'/>");
-   $('.fancy-checkbox').change(function(x){
-       $(this).parent().toggleClass("selected");
-       LangeUI.renderPlan();
-   });
-}
-
 LangeUI = {
+  addCheckBoxesToEvents: function() {
+     $('.vevent').append("<input class='fancy-checkbox' type='checkbox'/>");
+     $('.fancy-checkbox').change(function(x){
+         $(this).parent().toggleClass("selected");
+         LangeUI.renderPlan();
+     });
+  },
+
   renderPlan: function(){
     $('#plan').empty();
     $('#planTemplate').tmpl({eventSlots: Lange.schedule(extractSelectedEvents())})
