@@ -17,11 +17,26 @@ describe("lange-ui", function() {
         expect(checkboxes.length).toEqual($(".vevent").length);
     });
 
+    // Ken's homework
     xit("addCheckBoxesToEvents should add callback to renderPlan on change", function(){
+        myLoadFixture("selected_events.html");
       addCheckBoxesToEvents.prototype.renderPlan = function(){
-        alert("test");
+        expect(0).toEqual(1);
       };
       addCheckBoxesToEvents();
       $('.fancy-checkbox').click();
+    });
+
+    it("should renderPlan when event is selected", function(){
+        myLoadFixture("selected_events.html");
+        spyOn(window, 'renderPlan');
+
+        addCheckBoxesToEvents();
+        $('.fancy-checkbox').eq(1).click();
+
+
+        expect(extractSelectedEvents().length).toEqual(2);
+
+        expect(window.renderPlan).toHaveBeenCalled();
     });
 });
