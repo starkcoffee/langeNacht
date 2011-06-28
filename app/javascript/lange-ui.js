@@ -1,5 +1,3 @@
-
-
    function extractSelectedEvents(){
        return $(".vevent").filter(".selected").map(function(index){
           return {
