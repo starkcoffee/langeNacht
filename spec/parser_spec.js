@@ -8,12 +8,12 @@ describe("lange-ui", function() {
         expect(extractSelectedEvents()).toEqual(expectedEvents);
     });
 
-    xit("should add checkboxes to event", function(){
+    it("should add checkboxes to event", function(){
         myLoadFixture("selected_events.html");
 
         addCheckBoxesToEvents();
-        var checkboxes = $(".vevent").filter("input");
+
+        var checkboxes = $(".vevent>input.fancy-checkbox");
         expect(checkboxes.length).toEqual($(".vevent").length);
-        
     });
 });
