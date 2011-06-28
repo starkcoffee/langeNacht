@@ -35,4 +35,14 @@ describe("lange-ui", function() {
 
         expect(window.renderPlan).toHaveBeenCalled();
     });
+
+    it("should toggle selected events", function(){
+        spyOn(window, 'renderPlan');
+
+        addCheckBoxesToEvents();
+        $('.vevent.selected .fancy-checkbox').click();
+        $('.vevent:not(.selected) .fancy-checkbox').click();
+
+        expect(extractSelectedEvents().length).toEqual($(".vevent").length);
+    });
 });
