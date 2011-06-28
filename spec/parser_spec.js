@@ -31,9 +31,7 @@ describe("lange-ui", function() {
         spyOn(window, 'renderPlan');
 
         addCheckBoxesToEvents();
-        $('.fancy-checkbox').eq(1).click();
-
-        expect(extractSelectedEvents().length).toEqual(2);
+        $('.vevent:not(.selected) .fancy-checkbox').click();
 
         expect(window.renderPlan).toHaveBeenCalled();
     });
