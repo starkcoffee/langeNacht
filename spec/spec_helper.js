@@ -3,12 +3,13 @@ var event2 = {summary: "two", dtstart: "2011-01-30T20:00"};
 var eventWhichConflictsWithEvent2 = {summary: "three", dtstart: "2011-01-30T20:00"};
 var multiTimeEventConflictingWithEvent2 = {summary: "three", dtstart: "2011-01-30T20:00"};
 
-jasmine.getFixtures().fixturesPath = "spec/";  
+jasmine.getFixtures().fixturesPath = "spec/fixtures/";  
+var FIXTURES_PATH = jasmine.getFixtures().fixturesPath;
 
 function myLoadFixture(filename){
     loadFixtures(filename);
     if($("#jasmine-fixtures").html().trim() === ""){
-        throw "fixture " + jasmine.getFixtures().fixturesPath  + filename + " doesn't exist";
+        throw "fixture " + FIXTURES_PATH + filename + " doesn't exist";
     }
 }
 
@@ -59,7 +60,7 @@ describe("test helper code", function(){
     it("should complain about loading fixture that doesn't exist", function(){
         expect(function(){
             myLoadFixture("surely-this-doesnt-exist.html");
-         }).toThrow("fixture spec/surely-this-doesnt-exist.html doesn't exist");
+         }).toThrow("fixture "+  FIXTURES_PATH +"surely-this-doesnt-exist.html doesn't exist");
         
     });
 

@@ -3,7 +3,7 @@ describe("parsing stuff", function() {
     
     
 	it("should extract events from html", function() {
-	    myLoadFixture("example-schedule.html");
+	    myLoadFixture("selected_events.html");
 		var expectedEvents =  [
 		{ id : 0, summary : 'See Jellyfish Play Guitar', dtstart : '2011-07-21T13:00', dateDescription : '1pm, July 21' }
 		];
