@@ -7,4 +7,7 @@ describe("lange-ui", function() {
 
 		expect(extractSelectedEvents()).toEqual(expectedEvents);
     });
+  it("should add checkboxes to event", function(){
+    
+  });
 });
