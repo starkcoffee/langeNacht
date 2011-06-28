@@ -3,6 +3,15 @@ var event2 = {summary: "two", dtstart: "2011-01-30T20:00"};
 var eventWhichConflictsWithEvent2 = {summary: "three", dtstart: "2011-01-30T20:00"};
 var multiTimeEventConflictingWithEvent2 = {summary: "three", dtstart: "2011-01-30T20:00"};
 
+jasmine.getFixtures().fixturesPath = "spec/";  
+
+function myLoadFixture(filename){
+    loadFixtures(filename);
+    if($("#jasmine-fixtures").html().trim() === ""){
+        throw "fixture " + jasmine.getFixtures().fixturesPath  + filename + " doesn't exist";
+    }
+}
+
 function args(arguments){
     var args =[];
     for (var i=0; i< arguments.length; i++){
@@ -32,6 +41,8 @@ function expectedSchedule(){
 }
 
 
+
+
 describe("test helper code", function(){
     
     it("conflict func should handle varags ", function(){
@@ -44,4 +55,12 @@ describe("test helper code", function(){
             {dtstart: event2.dtstart, conflict: true, vevents: [event2, eventWhichConflictsWithEvent2]},
             ]);
     });
+
+    it("should complain about loading fixture that doesn't exist", function(){
+        expect(function(){
+            myLoadFixture("surely-this-doesnt-exist.html");
+         }).toThrow("fixture spec/surely-this-doesnt-exist.html doesn't exist");
+        
+    });
+
 });
