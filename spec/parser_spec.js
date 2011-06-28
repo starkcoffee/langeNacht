@@ -16,4 +16,12 @@ describe("lange-ui", function() {
         var checkboxes = $(".vevent>input.fancy-checkbox");
         expect(checkboxes.length).toEqual($(".vevent").length);
     });
+
+    xit("addCheckBoxesToEvents should add callback to renderPlan on change", function(){
+      addCheckBoxesToEvents.prototype.renderPlan = function(){
+        alert("test");
+      };
+      addCheckBoxesToEvents();
+      $('.fancy-checkbox').click();
+    });
 });
