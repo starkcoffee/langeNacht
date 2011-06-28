@@ -1,15 +1,15 @@
-function extractSelectedEvents(){
-   return $(".vevent").filter(".selected").map(function(index){
-      return {
-         id: index,
-         summary: $(this).find(".summary").html(),
-         dtstart: $(this).find(".dtstart").attr('title'),
-         dateDescription: $(this).find(".dtstart").html()
-      };
-   }).toArray();
-};
-
 LangeUI = {
+  extractSelectedEvents: function(){
+     return $(".vevent").filter(".selected").map(function(index){
+        return {
+           id: index,
+           summary: $(this).find(".summary").html(),
+           dtstart: $(this).find(".dtstart").attr('title'),
+           dateDescription: $(this).find(".dtstart").html()
+        };
+     }).toArray();
+  },
+
   addCheckBoxesToEvents: function() {
      $('.vevent').append("<input class='fancy-checkbox' type='checkbox'/>");
      $('.fancy-checkbox').change(function(x){

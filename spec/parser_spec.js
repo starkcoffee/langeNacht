@@ -1,6 +1,8 @@
 describe("lange-ui", function() {  
     var addCheckBoxesToEvents = LangeUI.addCheckBoxesToEvents;
     var renderPlan = LangeUI.renderPlan;
+    var extractSelectedEvents = LangeUI.extractSelectedEvents;
+
     beforeEach(function(){
         myLoadFixture("selected_events.html");
     });
