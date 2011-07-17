@@ -5,9 +5,7 @@ describe("lange-ui", function() {
     var numEvents;
     
 
-    beforeEach(function(){
-        myLoadFixture("selected_events.html");
-    });
+
     
     function loadEventsFixture(){
         myLoadFixture("events.html");
@@ -17,16 +15,18 @@ describe("lange-ui", function() {
     };
     
     describe("makeEventsSelectable", function(){
-        it("should make all events selectable", function(){
+        
+        beforeEach(function(){
             loadEventsFixture();
-
+        });
+        
+        it("should make all events selectable", function(){
             makeEventsSelectable();
 
             expect($(".vevent>input.fancy-checkbox").length).toEqual(numEvents);
         });
 
         it("should mark event as selected when it is selected", function(){
-            loadEventsFixture();
             makeEventsSelectable();
 
             $('.fancy-checkbox').first().click();
@@ -35,7 +35,6 @@ describe("lange-ui", function() {
         });
 
         it("should unmark event as selected when it is unselected", function(){
-            loadEventsFixture();
             makeEventsSelectable();
             $('.fancy-checkbox').first().click();
             $('.fancy-checkbox').first().click();
@@ -44,7 +43,6 @@ describe("lange-ui", function() {
         });
         
         it("should call renderPlan when event is selected", function(){
-            loadEventsFixture();
             makeEventsSelectable();
             spyOn(LangeUI, 'renderPlan');
 
@@ -56,12 +54,24 @@ describe("lange-ui", function() {
     
     
     describe("extractSelectedEvents", function(){
-        it("should extract selected events from html", function() {
-            var expectedEvents =  [
-                { id : 0, summary : 'See Jellyfish Play Guitar', dtstart : '2011-07-21T13:00', dateDescription : '1pm, July 21' }
-            ];
+        
+        beforeEach(function(){
+            loadEventsFixture();
+            makeEventsSelectable();
+        });
+        
+        it("should extract a selected event including its details", function() {    
+            $('.fancy-checkbox').eq(0).click();                 
 
-            expect(extractSelectedEvents()).toEqual(expectedEvents);
+            expect(extractSelectedEvents()).toEqual(
+                [
+                    { id : 0, 
+                      summary : 'See Jellyfish Play Guitar', 
+                      dtstart : '2011-07-21T13:00', 
+                      dateDescription : '1pm, July 21' 
+                    }
+                ]
+            );
         });
         
     });
