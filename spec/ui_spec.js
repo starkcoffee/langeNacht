@@ -18,10 +18,19 @@ describe("lange-ui", function() {
     
     it("should add checkboxes to all events", function(){
         loadEventsFixture();
-        
+         
         addCheckBoxesToEvents();
 
         expect($(".vevent>input.fancy-checkbox").length).toEqual(numEvents);
+    });
+    
+    it("should add class 'selected' to an event when it's checkbox is clicked", function(){
+        loadEventsFixture();
+        addCheckBoxesToEvents();
+        
+        $('.fancy-checkbox').first().click();
+        
+        expect($('.vevent').first()).toHaveClass('selected');
     });
 
     it("should extract selected events from html", function() {
