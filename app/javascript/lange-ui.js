@@ -1,4 +1,13 @@
 LangeUI = {
+    
+  addCheckBoxesToEvents: function() {
+     $('.vevent').append("<input class='fancy-checkbox' type='checkbox'/>");
+     $('.fancy-checkbox').change(function(x){
+         $(this).parent().toggleClass("selected");
+         LangeUI.renderPlan();
+     });
+  },
+  
   extractSelectedEvents: function(){
      return $(".vevent").filter(".selected").map(function(index){
         return {
@@ -8,14 +17,6 @@ LangeUI = {
            dateDescription: $(this).find(".dtstart").html()
         };
      }).toArray();
-  },
-
-  addCheckBoxesToEvents: function() {
-     $('.vevent').append("<input class='fancy-checkbox' type='checkbox'/>");
-     $('.fancy-checkbox').change(function(x){
-         $(this).parent().toggleClass("selected");
-         LangeUI.renderPlan();
-     });
   },
 
   renderPlan: function(){
