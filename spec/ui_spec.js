@@ -2,9 +2,26 @@ describe("lange-ui", function() {
     var addCheckBoxesToEvents = LangeUI.addCheckBoxesToEvents;
     var renderPlan = LangeUI.renderPlan;
     var extractSelectedEvents = LangeUI.extractSelectedEvents;
+    var numEvents;
+    
 
     beforeEach(function(){
         myLoadFixture("selected_events.html");
+    });
+    
+    function loadEventsFixture(){
+        myLoadFixture("events.html");
+        numEvents = $(".vevent").length;
+        expect(numEvents).toBeGreaterThan(0);
+        expect($(".vevent>input.fancy-checkbox").length).toEqual(0);
+    };
+    
+    it("should add checkboxes to all events", function(){
+        loadEventsFixture();
+        
+        addCheckBoxesToEvents();
+
+        expect($(".vevent>input.fancy-checkbox").length).toEqual(numEvents);
     });
 
     it("should extract selected events from html", function() {
@@ -15,12 +32,7 @@ describe("lange-ui", function() {
         expect(extractSelectedEvents()).toEqual(expectedEvents);
     });
 
-    it("should add checkboxes to event", function(){
-        addCheckBoxesToEvents();
 
-        var checkboxes = $(".vevent>input.fancy-checkbox");
-        expect(checkboxes.length).toEqual($(".vevent").length);
-    });
 
     it("should renderPlan when event is selected", function(){
         spyOn(LangeUI, 'renderPlan');
