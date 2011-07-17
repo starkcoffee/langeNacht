@@ -22,15 +22,6 @@ describe("lange-ui", function() {
         expect(checkboxes.length).toEqual($(".vevent").length);
     });
 
-    // Ken's homework
-    xit("LangeUI.addCheckBoxesToEvents should add callback to renderPlan on change", function(){
-      addCheckBoxesToEvents.prototype.renderPlan = function(){
-        expect(0).toEqual(1);
-      };
-      addCheckBoxesToEvents();
-      $('.fancy-checkbox').click();
-    });
-
     it("should renderPlan when event is selected", function(){
         spyOn(LangeUI, 'renderPlan');
 
