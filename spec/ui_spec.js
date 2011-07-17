@@ -44,10 +44,11 @@ describe("lange-ui", function() {
         });
         
         it("should call renderPlan when event is selected", function(){
+            loadEventsFixture();
+            makeEventsSelectable();
             spyOn(LangeUI, 'renderPlan');
 
-            makeEventsSelectable();
-            $('.vevent:not(.selected) .fancy-checkbox').click();
+            $('.fancy-checkbox').first().click();
 
             expect(LangeUI.renderPlan).toHaveBeenCalled();
         });
