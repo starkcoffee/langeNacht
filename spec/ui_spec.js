@@ -74,6 +74,21 @@ describe("lange-ui", function() {
             );
         });
         
+        it("should extract multiple selected events", function() {   
+            $('.fancy-checkbox').eq(0).click();                 
+            $('.fancy-checkbox').eq(1).click();                  
+            
+            expect(extractSelectedEvents().length).toEqual(2);
+        });
+        
+        it("should not include unselected events", function() { 
+            $('.fancy-checkbox').eq(0).click();
+            expect($('.vevent:not(.selected)').length).not.toEqual(0); 
+            
+            expect(extractSelectedEvents().length).toEqual(1);
+        });  
+        
+        
     });
             
 
