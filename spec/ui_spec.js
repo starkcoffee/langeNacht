@@ -24,7 +24,7 @@ describe("lange-ui", function() {
         expect($(".vevent>input.fancy-checkbox").length).toEqual(numEvents);
     });
     
-    it("should add class 'selected' to an event when it's checkbox is clicked", function(){
+    it("should add class 'selected' to an event when it is checked", function(){
         loadEventsFixture();
         addCheckBoxesToEvents();
         
@@ -32,6 +32,17 @@ describe("lange-ui", function() {
         
         expect($('.vevent').first()).toHaveClass('selected');
     });
+    
+    it("should remove class 'selected' from an event when it is unchecked", function(){
+        loadEventsFixture();
+        addCheckBoxesToEvents();
+        $('.fancy-checkbox').first().click();
+        $('.fancy-checkbox').first().click();
+        
+        expect($('.vevent').first()).not.toHaveClass('selected');
+    });
+    
+    
 
     it("should extract selected events from html", function() {
         var expectedEvents =  [
@@ -52,13 +63,5 @@ describe("lange-ui", function() {
         expect(LangeUI.renderPlan).toHaveBeenCalled();
     });
 
-    it("should toggle selected events", function(){
-        spyOn(LangeUI, 'renderPlan');
 
-        addCheckBoxesToEvents();
-        $('.vevent.selected .fancy-checkbox').click();
-        $('.vevent:not(.selected) .fancy-checkbox').click();
-
-        expect(extractSelectedEvents().length).toEqual($(".vevent").length);
-    });
 });
