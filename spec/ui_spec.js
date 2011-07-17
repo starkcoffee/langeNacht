@@ -88,6 +88,10 @@ describe("lange-ui", function() {
             expect(extractSelectedEvents().length).toEqual(1);
         });  
         
+        it("should return empty array when no events selected", function(){
+            expect(extractSelectedEvents()).toEqual([]);
+        });
+        
         
     });
             
