@@ -4,9 +4,6 @@ describe("lange-ui", function() {
     var extractSelectedEvents = LangeUI.extractSelectedEvents;
     var numEvents;
     
-
-
-    
     function loadEventsFixture(){
         myLoadFixture("events.html");
         numEvents = $(".vevent").length;
@@ -95,9 +92,19 @@ describe("lange-ui", function() {
         
     });
             
-
-
-
+    describe("renderPlan", function(){
+        
+        beforeEach(function(){
+            loadEventsFixture();
+            makeEventsSelectable();
+        });
+        
+        it("should complain if there is no div called 'plan'", function() {
+            $('#plan').remove();
+            
+            expect(function(){ renderPlan(); }).toThrow("expect a div called 'plan' to exist");
+        });         
+    });
 
 
 

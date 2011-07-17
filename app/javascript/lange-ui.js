@@ -20,6 +20,9 @@ LangeUI = {
   },
 
   renderPlan: function(){
+    if($('#plan').length == 0){
+        throw "expect a div called 'plan' to exist";
+    }
     $('#plan').empty();
     $('#planTemplate').tmpl({eventSlots: Lange.schedule(extractSelectedEvents())})
         .appendTo( "#plan" );
