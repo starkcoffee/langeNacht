@@ -1,5 +1,5 @@
 describe("lange-ui", function() {  
-    var addCheckBoxesToEvents = LangeUI.addCheckBoxesToEvents;
+    var makeEventsSelectable = LangeUI.makeEventsSelectable;
     var renderPlan = LangeUI.renderPlan;
     var extractSelectedEvents = LangeUI.extractSelectedEvents;
     var numEvents;
@@ -17,26 +17,26 @@ describe("lange-ui", function() {
     };
     
     describe("makeEventsSelectable", function(){
-        it("should add checkboxes to all events to make the selectable", function(){
+        it("should make all events selectable", function(){
             loadEventsFixture();
 
-            addCheckBoxesToEvents();
+            makeEventsSelectable();
 
             expect($(".vevent>input.fancy-checkbox").length).toEqual(numEvents);
         });
 
-        it("should add class 'selected' to an event when it is selected", function(){
+        it("should mark event as selected when it is selected", function(){
             loadEventsFixture();
-            addCheckBoxesToEvents();
+            makeEventsSelectable();
 
             $('.fancy-checkbox').first().click();
 
             expect($('.vevent').first()).toHaveClass('selected');
         });
 
-        it("should remove class 'selected' from an event when it is unselected", function(){
+        it("should unmark event as selected when it is unselected", function(){
             loadEventsFixture();
-            addCheckBoxesToEvents();
+            makeEventsSelectable();
             $('.fancy-checkbox').first().click();
             $('.fancy-checkbox').first().click();
 
@@ -46,7 +46,7 @@ describe("lange-ui", function() {
         it("should call renderPlan when event is selected", function(){
             spyOn(LangeUI, 'renderPlan');
 
-            addCheckBoxesToEvents();
+            makeEventsSelectable();
             $('.vevent:not(.selected) .fancy-checkbox').click();
 
             expect(LangeUI.renderPlan).toHaveBeenCalled();
