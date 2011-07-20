@@ -1,5 +1,12 @@
+$.template("defaultPlanTemplate", "Your plan:<br>                                       \
+        <ul>                                                                            \
+          {{each eventSlots}}                                                           \
+              <li>${vevent.dtstart} - ${vevent.summary}</li>                    \
+          {{/each}}                                                                     \
+        <ul/>" );
+
 LangeUI = {
-    
+
   makeEventsSelectable: function() {
      $('.vevent').append("<input class='fancy-checkbox' type='checkbox'/>");
      $('.fancy-checkbox').change(function(x){
@@ -24,7 +31,7 @@ LangeUI = {
         throw "expect a div called 'plan' to exist";
     }
     $('#plan').empty();
-    $('#planTemplate').tmpl({eventSlots: Lange.schedule(extractSelectedEvents())})
+    $.tmpl('defaultPlanTemplate',{eventSlots: Lange.schedule(LangeUI.extractSelectedEvents())})
         .appendTo( "#plan" );
     $('.conflict').click(function(){
        // find event with the id and click the checkbox

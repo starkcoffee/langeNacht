@@ -3,6 +3,12 @@ describe("lange-ui", function() {
     var renderPlan = LangeUI.renderPlan;
     var extractSelectedEvents = LangeUI.extractSelectedEvents;
     var numEvents;
+
+    var extractedEvent0 = {   id : 0,
+                              summary : 'See Jellyfish Play Guitar',
+                              dtstart : '2011-07-21T13:00',
+                              dateDescription : '1pm, July 21'
+                          };
     
     function loadEventsFixture(){
         myLoadFixture("events.html");
@@ -64,19 +70,11 @@ describe("lange-ui", function() {
         it("should extract a selected event including its details", function() {    
             selectEvent(0);                 
 
-            expect(extractSelectedEvents()).toEqual(
-                [
-                    { id : 0, 
-                      summary : 'See Jellyfish Play Guitar', 
-                      dtstart : '2011-07-21T13:00', 
-                      dateDescription : '1pm, July 21' 
-                    }
-                ]
-            );
+            expect(extractSelectedEvents()).toEqual([extractedEvent0]);
         });
         
         it("should extract multiple selected events", function() {   
-            selectEvendt(0);                 
+            selectEvent(0);
             selectEvent(1);                  
             
             expect(extractSelectedEvents().length).toEqual(2);
@@ -98,20 +96,25 @@ describe("lange-ui", function() {
             
     describe("renderPlan", function(){
         
-        beforeEach(function(){
-            loadEventsFixture();
-            makeEventsSelectable();
-        });
-        
         it("should complain if there is no div called 'plan'", function() {
-            $('#plan').remove();
+            expect($('#plan')).not.toExist();
             
             expect(function(){ renderPlan(); }).toThrow("expect a div called 'plan' to exist");
-        });      
+        });
+
         
-        xit("should render the schedule of selected events", function() {
-            selectEvent(0);                 
-            selectEvent(1);
+        it("should render the schedule of selected events", function() {
+            spyOn(LangeUI, 'extractSelectedEvents').andReturn("selected events");
+            spyOn(Lange, 'schedule').andReturn(expectedSchedule(event1,event2));
+
+            jasmine.getFixtures().set("<div id=plan></div>");
+
+            renderPlan();
+
+            expect($('#plan').html()).toContain(event1.dtstart + " - " + event1.summary);
+            expect($('#plan').html()).toContain(event2.dtstart + " - " + event2.summary);
+
+            expect(Lange.schedule).toHaveBeenCalledWith("selected events");
         });
            
     });
