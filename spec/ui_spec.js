@@ -11,6 +11,10 @@ describe("lange-ui", function() {
         expect($(".vevent>input.fancy-checkbox").length).toEqual(0);
     };
     
+    function selectEvent(index){
+        $('.fancy-checkbox').eq(index).click();
+    };
+    
     describe("makeEventsSelectable", function(){
         
         beforeEach(function(){
@@ -26,15 +30,15 @@ describe("lange-ui", function() {
         it("should mark event as selected when it is selected", function(){
             makeEventsSelectable();
 
-            $('.fancy-checkbox').first().click();
+            selectEvent(0);
 
             expect($('.vevent').first()).toHaveClass('selected');
         });
 
         it("should unmark event as selected when it is unselected", function(){
             makeEventsSelectable();
-            $('.fancy-checkbox').first().click();
-            $('.fancy-checkbox').first().click();
+            selectEvent(0);
+            selectEvent(0);
 
             expect($('.vevent').first()).not.toHaveClass('selected');
         });
@@ -43,7 +47,7 @@ describe("lange-ui", function() {
             makeEventsSelectable();
             spyOn(LangeUI, 'renderPlan');
 
-            $('.fancy-checkbox').first().click();
+            selectEvent(0);
 
             expect(LangeUI.renderPlan).toHaveBeenCalled();
         });
@@ -58,7 +62,7 @@ describe("lange-ui", function() {
         });
         
         it("should extract a selected event including its details", function() {    
-            $('.fancy-checkbox').eq(0).click();                 
+            selectEvent(0);                 
 
             expect(extractSelectedEvents()).toEqual(
                 [
@@ -72,14 +76,14 @@ describe("lange-ui", function() {
         });
         
         it("should extract multiple selected events", function() {   
-            $('.fancy-checkbox').eq(0).click();                 
-            $('.fancy-checkbox').eq(1).click();                  
+            selectEvendt(0);                 
+            selectEvent(1);                  
             
             expect(extractSelectedEvents().length).toEqual(2);
         });
         
         it("should not include unselected events", function() { 
-            $('.fancy-checkbox').eq(0).click();
+            selectEvent(0);
             expect($('.vevent:not(.selected)').length).not.toEqual(0); 
             
             expect(extractSelectedEvents().length).toEqual(1);
@@ -103,7 +107,13 @@ describe("lange-ui", function() {
             $('#plan').remove();
             
             expect(function(){ renderPlan(); }).toThrow("expect a div called 'plan' to exist");
-        });         
+        });      
+        
+        xit("should render the schedule of selected events", function() {
+            selectEvent(0);                 
+            selectEvent(1);
+        });
+           
     });
 
 
