@@ -1,25 +1,17 @@
 describe("lange-ui", function() {
     var makeEventsSelectable = LangeUI.makeEventsSelectable;
     var updatePlan = LangeUI.updatePlan;
+    var renderPlan = LangeUI.renderPlan;
     var extractSelectedEvents = LangeUI.extractSelectedEvents;
-    var numEvents;
 
 
-    function loadEventsFixture(){
-        myLoadFixture("events.html");
-        numEvents = $(".vevent").length;
-        expect(numEvents).toBeGreaterThan(0);
-        expect($(".vevent>input.fancy-checkbox").length).toEqual(0);
-    };
 
-    function selectEvent(index){
-        $('.fancy-checkbox').eq(index).click();
-    };
 
     describe("makeEventsSelectable", function(){
-
+        var numEvents;
         beforeEach(function(){
             loadEventsFixture();
+            numEvents = $(".vevent").length;
         });
 
         it("should make all events selectable", function(){
@@ -95,27 +87,22 @@ describe("lange-ui", function() {
 
     });
 
-    describe("updatePlan", function(){
+    describe("renderPlan", function(){
 
         it("should complain if there is no div called 'plan'", function() {
             expect($('#plan')).not.toExist();
 
-            expect(function(){ updatePlan(); }).toThrow("expect a div called 'plan' to exist");
+            expect(function(){ renderPlan([]); }).toThrow("expect a div called 'plan' to exist");
         });
 
 
-        it("should render the schedule of selected events", function() {
-            spyOn(LangeUI, 'extractSelectedEvents').andReturn("selected events");
-            spyOn(Lange, 'schedule').andReturn(expectedSchedule(event1,event2));
-
+        it("should render the schedule", function() {
             jasmine.getFixtures().set("<div id=plan></div>");
 
-            updatePlan();
+            renderPlan(expectedSchedule(event1,event2));
 
             expect($('#plan').html()).toContain(event1.dtstart + " - " + event1.summary);
             expect($('#plan').html()).toContain(event2.dtstart + " - " + event2.summary);
-
-            expect(Lange.schedule).toHaveBeenCalledWith("selected events");
         });
 
     });

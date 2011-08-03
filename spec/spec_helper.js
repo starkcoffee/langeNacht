@@ -39,9 +39,18 @@ function expectedSchedule(){
         };
         return slot;
     });
-}
+};
 
+function loadEventsFixture(){
+        myLoadFixture("events.html");
+        var numEvents = $(".vevent").length;
+        expect(numEvents).toBeGreaterThan(0);
+        expect($(".vevent>input.fancy-checkbox").length).toEqual(0);
+};
 
+function selectEvent(index){
+    $('.fancy-checkbox').eq(index).click();
+};
 
 
 describe("test helper code", function(){
