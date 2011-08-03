@@ -11,7 +11,7 @@ LangeUI = {
      $('.vevent').append("<input class='fancy-checkbox' type='checkbox'/>");
      $('.fancy-checkbox').change(function(x){
          $(this).parent().toggleClass("selected");
-         LangeUI.renderPlan();
+         LangeUI.updatePlan();
      });
   },
   
@@ -26,7 +26,7 @@ LangeUI = {
      }).toArray();
   },
 
-  renderPlan: function(){
+  updatePlan: function(){
     if($('#plan').length == 0){
         throw "expect a div called 'plan' to exist";
     }

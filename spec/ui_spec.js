@@ -1,6 +1,6 @@
 describe("lange-ui", function() {
     var makeEventsSelectable = LangeUI.makeEventsSelectable;
-    var renderPlan = LangeUI.renderPlan;
+    var updatePlan = LangeUI.updatePlan;
     var extractSelectedEvents = LangeUI.extractSelectedEvents;
     var numEvents;
 
@@ -44,13 +44,13 @@ describe("lange-ui", function() {
             expect($('.vevent').first()).not.toHaveClass('selected');
         });
 
-        it("should call renderPlan when event is selected", function(){
+        it("should call updatePlan when event is selected", function(){
             makeEventsSelectable();
-            spyOn(LangeUI, 'renderPlan');
+            spyOn(LangeUI, 'updatePlan');
 
             selectEvent(0);
 
-            expect(LangeUI.renderPlan).toHaveBeenCalled();
+            expect(LangeUI.updatePlan).toHaveBeenCalled();
         });
     });
 
@@ -95,12 +95,12 @@ describe("lange-ui", function() {
 
     });
 
-    describe("renderPlan", function(){
+    describe("updatePlan", function(){
 
         it("should complain if there is no div called 'plan'", function() {
             expect($('#plan')).not.toExist();
 
-            expect(function(){ renderPlan(); }).toThrow("expect a div called 'plan' to exist");
+            expect(function(){ updatePlan(); }).toThrow("expect a div called 'plan' to exist");
         });
 
 
@@ -110,7 +110,7 @@ describe("lange-ui", function() {
 
             jasmine.getFixtures().set("<div id=plan></div>");
 
-            renderPlan();
+            updatePlan();
 
             expect($('#plan').html()).toContain(event1.dtstart + " - " + event1.summary);
             expect($('#plan').html()).toContain(event2.dtstart + " - " + event2.summary);
