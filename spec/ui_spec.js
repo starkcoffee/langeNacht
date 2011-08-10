@@ -60,8 +60,8 @@ describe("lange-ui", function() {
             expect(extractSelectedEvents()).toEqual([
                 {   id : 0,
                     summary : 'See Jellyfish Play Guitar',
-                    dtstart : '2011-07-21T13:00',
-                    dateDescription : '1pm, July 21'
+                    dtstart : '2011-07-20T13:00',
+                    dateDescription : '1pm, July 20'
                  }
             ]);
         });
