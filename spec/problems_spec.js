@@ -9,4 +9,10 @@ describe("some weird things", function() {
 		}).toThrow();
 		
 	});
+
+    it("should be able to set multiple html fixtures inline", function(){
+        jasmine.getFixtures().set("<div id=fixture_1></div>");
+        jasmine.getFixtures().set("<div id=fixture_2></div>");
+        expect($("fixture_2")).toExist();
+    });
 });
