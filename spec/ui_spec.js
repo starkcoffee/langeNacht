@@ -98,6 +98,8 @@ describe("lange-ui", function() {
 
         it("should render the schedule", function() {
             jasmine.getFixtures().set("<div id=plan></div>");
+            var event1 = {summary: "one", dtstart: "2011-01-30T17:00"};
+            var event2 = {summary: "two", dtstart: "2011-01-30T20:00"};
 
             renderPlan(expectedSchedule(event1,event2));
 

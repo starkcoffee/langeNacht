@@ -1,9 +1,4 @@
-var event1 = {summary: "one", dtstart: "2011-01-30T17:00"};
-var event2 = {summary: "two", dtstart: "2011-01-30T20:00"};
-var eventWhichConflictsWithEvent2 = {summary: "three", dtstart: "2011-01-30T20:00"};
-var multiTimeEventConflictingWithEvent2 = {summary: "three", dtstart: "2011-01-30T20:00"};
-
-jasmine.getFixtures().fixturesPath = "spec/fixtures/";  
+jasmine.getFixtures().fixturesPath = "spec/fixtures/";
 var FIXTURES_PATH = jasmine.getFixtures().fixturesPath;
 
 function myLoadFixture(filename){
@@ -44,6 +39,7 @@ function expectedSchedule(){
 function loadEventsFixture(){
         myLoadFixture("events.html");
         var numEvents = $(".vevent").length;
+        expect($('#plan')).toExist();
         expect(numEvents).toBeGreaterThan(0);
         expect($(".vevent>input.fancy-checkbox").length).toEqual(0);
 };
@@ -54,7 +50,10 @@ function selectEvent(index){
 
 
 describe("test helper code", function(){
-    
+    var event1 = {summary: "one", dtstart: "2011-01-30T17:00"};
+    var event2 = {summary: "two", dtstart: "2011-01-30T20:00"};
+    var eventWhichConflictsWithEvent2 = {summary: "three", dtstart: "2011-01-30T20:00"};
+
     it("conflict func should handle varags ", function(){
         expect(conflict(event1, event2)).toEqual({conflict: true, events: [event1, event2]});
     });
