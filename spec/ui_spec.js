@@ -106,9 +106,19 @@ describe("lange-ui", function() {
             expect($('#plan').html()).toContain(event1.dtstart + " - " + event1.summary);
             expect($('#plan').html()).toContain(event2.dtstart + " - " + event2.summary);
         });
-
     });
 
+    describe("makeConflictedEventsSelectable", function(){
+        it("should make all conflicted events selectable as a possible choice for a conflict", function(){
+            setFixtures("<div class='conflict' eventId='event_summary-event_startdate'>An event</div>");
+            LangeUI.makeConflictedEventsSelectable();
+            spyOn(LangeUI, 'resolveConflict');
+
+            $('.conflict').click();
+
+            expect(LangeUI.resolveConflict).toHaveBeenCalledWith('event_summary-event_startdate');
+        });
+    });
 
 
 

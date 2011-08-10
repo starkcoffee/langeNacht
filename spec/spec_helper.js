@@ -48,6 +48,10 @@ function selectEvent(index){
     $('.fancy-checkbox').eq(index).click();
 };
 
+function selectEventToResolveConflict(index){
+    $('.conflict').eq(index).click();
+};
+
 
 describe("test helper code", function(){
     var event1 = {summary: "one", dtstart: "2011-01-30T17:00"};

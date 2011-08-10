@@ -7,8 +7,10 @@ $.template("defaultPlanTemplate", "Your plan:<br>                               
 
 LangeUI = {
 
+
   updatePlan: function(){
-      LangeUI.renderPlan(Lange.schedule(LangeUI.extractSelectedEvents()))
+      LangeUI.renderPlan(Lange.schedule(LangeUI.extractSelectedEvents()));
+      makeConflictedEventsSelectable();
   },
 
   makeEventsSelectable: function() {
@@ -17,6 +19,16 @@ LangeUI = {
          $(this).parent().toggleClass("selected");
          LangeUI.updatePlan();
      });
+  },
+
+  makeConflictedEventsSelectable: function() {
+     $('.conflict').click(function(x){
+        LangeUI.resolveConflict($(this).attr("eventId"));
+    });
+  },
+
+  resolveConflict: function(chosen_event_id){
+
   },
   
   extractSelectedEvents: function(){
@@ -37,11 +49,6 @@ LangeUI = {
     $('#plan').empty();
     $.tmpl('defaultPlanTemplate',{eventSlots: schedule})
         .appendTo( "#plan" );
-    $('.conflict').click(function(){
-       // find event with the id and click the checkbox
-        var id = $(this).attr('eventId');
-        $($('.vevent')[id]).find('.fancy-checkbox').click();
-        $(this).remove(); 
-    });
+
   }
 }
