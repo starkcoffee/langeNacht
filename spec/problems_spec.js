@@ -20,6 +20,10 @@ describe("some weird things about jasmine-jquery", function() {
     });
 });
 
+function foo(){
+    return "some value";
+};
+
 describe("some weird things about javascript", function() {
     it("should be able to add a onClick event to a div", function(){
        setFixtures("<div id=foo>la la la</div>");
@@ -31,4 +35,10 @@ describe("some weird things about javascript", function() {
        expect(clicked).toBeTruthy();
     });
 
+    it("will call global functions in jquery templates when you are not expecting", function(){
+        $.template("myTemplate", "${bar} should not have {{if foo}}foo{{/if}}");
+        setFixtures("<div id=someDiv></div>");
+        $.tmpl('myTemplate',{bar: "some property"}).appendTo( "#someDiv" );
+        expect($('#someDiv').html()).not.toContain("foo");
+    });
 });

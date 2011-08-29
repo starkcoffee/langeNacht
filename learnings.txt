@@ -1,3 +1,21 @@
+Mon 29 Aug
+
+was trying to display conflicts in the jquery template
+
+$.template("defaultPlanTemplate", "Your plan:<br>                                       \
+        <ul>                                                                            \
+          {{each eventSlots}}   \
+            {{if conflict}}                                                             \
+              <li>${dtstart} - Damn! You have a conflict!!                              \
+                <ul>                                                                    \
+
+and it kept entering the if block, even though the eventSlots I  was passing in
+didn't contain a "conflict" property.
+
+after much cursing and debugging, I discovered that I had defined a conflict() function
+as a test helper in my spec_helper.js , and this returned a truthy value. the template
+was calling this! very frustrating! I have documented it in problems_spec.js
+
 Tue 21 Jun 2011 22:46:14 CEST
 
 we tried to test our UI functions with jasmine fixtures and encountered

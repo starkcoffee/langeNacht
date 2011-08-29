@@ -1,9 +1,24 @@
+function bunda(){
+  return "bunda";
+};
+
 $.template("defaultPlanTemplate", "Your plan:<br>                                       \
         <ul>                                                                            \
-          {{each eventSlots}}                                                           \
-              <li>${vevent.dtstart} - ${vevent.summary}</li>                    \
+          {{each eventSlots}}   \
+              <li>conflict is: ${bunda}</li>                                              \
+            {{if bunda }}                                                         \
+              <li>${dtstart} - Damn! You have a conflict!!                              \
+                <ul>                                                                    \
+                  {{each(index,value) vevents}}                                         \
+                  <li class='conflict'>${value.summary}</li>                           \
+                  {{/each}}                                                             \
+                </ul>                                                                   \
+              </li>                                                                     \
+            {{else}}                                                                    \
+              <li>${dtstart} - ${vevent.summary}</li>                                   \
+            {{/if}}                                                                     \
           {{/each}}                                                                     \
-        <ul/>" );
+        <ul/>");
 
 LangeUI = {
 
@@ -51,4 +66,4 @@ LangeUI = {
         .appendTo( "#plan" );
 
   }
-}
+};
